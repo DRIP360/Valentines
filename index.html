@@ -5,13 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surprise!</title>
     <style>
-        body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #ffe4e1; font-family: 'Arial', sans-serif; overflow: hidden; }
-        .container { text-align: center; background: white; padding: 40px; border-radius: 25px; width: 85%; box-shadow: 0 15px 30px rgba(0,0,0,0.1); position: relative; }
-        h1 { color: #d63384; font-size: 1.8rem; margin-bottom: 30px; }
-        .btn-wrapper { display: flex; justify-content: center; align-items: center; gap: 20px; min-height: 150px; }
-        button { padding: 15px 30px; font-size: 1.1rem; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; touch-action: manipulation; }
-        #yesBtn { background-color: #ff4d6d; color: white; position: relative; z-index: 1; }
-        #noBtn { background-color: #6c757d; color: white; position: absolute; transition: 0.1s; z-index: 2; }
+        body { 
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: #ffe4e1; 
+            font-family: sans-serif; 
+            overflow: hidden; 
+        }
+        .container { 
+            text-align: center; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            width: 80%; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+            z-index: 1;
+        }
+        h1 { color: #d63384; font-size: 1.5rem; }
+        .btn-wrapper { 
+            margin-top: 30px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            min-height: 60px;
+        }
+        button { 
+            padding: 15px 25px; 
+            font-size: 18px; 
+            border-radius: 10px; 
+            border: none; 
+            font-weight: bold; 
+            cursor: pointer; 
+            touch-action: manipulation; 
+        }
+        /* The Yes button stays in one spot */
+        #yesBtn { 
+            background-color: #ff4d6d; 
+            color: white; 
+            position: relative; 
+        }
+        /* The No button starts next to it, then jumps */
+        #noBtn { 
+            background-color: #6c757d; 
+            color: white; 
+            position: absolute; 
+            margin-left: 120px; /* Moves it away from Yes initially */
+            transition: 0.1s; 
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
@@ -26,17 +70,17 @@
     <script>
         function moveButton() {
             const btn = document.getElementById('noBtn');
-            // Keeps the button within the visible screen area
+            // This ensures it stays within your iPhone's screen width and height
             const x = Math.random() * (window.innerWidth - btn.offsetWidth);
             const y = Math.random() * (window.innerHeight - btn.offsetHeight);
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
+            btn.style.marginLeft = '0px'; // Removes the initial margin once it jumps
         }
 
         function celebrate() {
             document.getElementById('mainCard').innerHTML = `
-                <h1 style="font-size: 2.5rem;">YAY! 🥰</h1>
-                <p>I knew you'd click Yes eventually!</p>
+                <h1 style="color: #d63384;">YAY! 🥰</h1>
                 <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" style="width: 100%; border-radius: 15px;">
             `;
         }
